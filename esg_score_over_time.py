@@ -5,22 +5,22 @@ import matplotlib.pyplot as plt
 import streamlit as st
 import numpy as np
 
-def esg_over_time(carteira_csv, engine):
+def esg_over_time(portfolio, engine):
     
     
 
-    portfolio = pd.read_csv(carteira_csv,skiprows=1,encoding = "ISO-8859-1", sep=';')
+    #portfolio = pd.read_csv(carteira_csv,skiprows=1,encoding = "ISO-8859-1", sep=';')
     #portfolio = pd.read_csv('IBOVDia_27-09-21.csv',skiprows=1,encoding = "ISO-8859-1", sep=';')
-    portfolio.reset_index(inplace=True)
-    cols = portfolio.columns
-    cols = cols[1:]
-    portfolio = portfolio.iloc[:,:-1]
-    portfolio.columns = cols
-    portfolio = portfolio.drop(['Ação','Tipo','Qtde. Teórica'], axis = 1)
-    portfolio = portfolio.iloc[:-2,:]
-    portfolio.rename(columns={'Código':'ticker','Part. (%)':'port_weight'},inplace=True)
-    portfolio['port_weight'] = portfolio.apply(lambda x: float(x['port_weight'].replace(',','.'))/100,axis=1)
-
+    # portfolio.reset_index(inplace=True)
+    # cols = portfolio.columns
+    # cols = cols[1:]
+    # portfolio = portfolio.iloc[:,:-1]
+    # portfolio.columns = cols
+    # portfolio = portfolio.drop(['Ação','Tipo','Qtde. Teórica'], axis = 1)
+    # portfolio = portfolio.iloc[:-2,:]
+    # portfolio.rename(columns={'Código':'ticker','Part. (%)':'port_weight'},inplace=True)
+    # portfolio['port_weight'] = portfolio.apply(lambda x: float(x['port_weight'].replace(',','.'))/100,axis=1)
+    #portfolio = pd.read_csv(carteira_csv)
     esg_score = pd.read_sql_query("""SELECT comp.ticker,
                                             comp.industry,
                                             esg.score_value,
